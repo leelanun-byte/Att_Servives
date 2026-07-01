@@ -1,0 +1,1513 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anchor Bolt & Pedestal Connection Designer PRO</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- KaTeX CSS & JS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Sarabun', sans-serif;
+            background-color: #0f172a;
+            color: #f1f5f9;
+        }
+        .code-font {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #475569;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        @media print {
+            body {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-layout {
+                display: block !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .print-card {
+                background: white !important;
+                border: 1px solid #cbd5e1 !important;
+                color: black !important;
+                box-shadow: none !important;
+                margin-bottom: 20px !important;
+                page-break-inside: avoid;
+            }
+            .math-box {
+                background-color: #f8fafc !important;
+                border: 1px solid #cbd5e1 !important;
+                color: #000000 !important;
+            }
+            .text-indigo-400 { color: #1d4ed8 !important; }
+            .text-emerald-400 { color: #047857 !important; }
+            .text-amber-400 { color: #b45309 !important; }
+            .text-rose-400 { color: #be123c !important; }
+            .bg-slate-900, .bg-slate-800 {
+                background-color: #ffffff !important;
+                color: #000000 !important;
+            }
+            svg {
+                filter: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header Section -->
+    <header class="bg-slate-900 border-b border-slate-800 py-4 px-6 no-print">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-indigo-600 p-2 rounded-lg text-white shadow-lg">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold tracking-tight text-white">Anchor Bolt & Connection Designer PRO</h1>
+                    <p class="text-xs text-slate-400">คำนวณแผ่นเหล็กยึดเพลทรองรับโครงสร้างเสาเหล็กเดี่ยวและเหล็กประกอบคู่สะสมกำลัง</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-2">
+                <button onclick="window.print()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-lg font-medium flex items-center gap-2 transition duration-200 shadow-md">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                    </svg>
+                    พิมพ์รายงานคำนวณ (A4)
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-1 max-w-8xl w-full mx-auto p-4 md:p-6 grid grid-cols-1 lg:grid-cols-12 gap-6 print-layout">
+        
+        <!-- Left Panel: Inputs (No Sliders) -->
+        <aside class="lg:col-span-4 space-y-6 no-print">
+            <!-- Project Information Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-semibold text-indigo-400 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                    ข้อมูลโครงการและระบบจุดต่อ
+                </h2>
+                <div class="space-y-3 text-sm">
+                    <div>
+                        <label class="block text-slate-400 mb-1">ชื่อโครงการ</label>
+                        <input type="text" id="project_name" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500" value="โครงการออกแบบโครงสร้างช่วงพาดกว้าง">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">เจ้าของโครงการ</label>
+                        <input type="text" id="project_owner" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500" value="บมจ. อสังหาริมทรัพย์เพื่ออนาคต">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">สถานที่ก่อสร้าง</label>
+                        <input type="text" id="project_location" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500" value="นิคมอุตสาหกรรมนวัตกรรมสีเขียว">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">วิศวกรผู้ออกแบบ</label>
+                        <input type="text" id="engineer_name" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-indigo-500" value="นายสมศักดิ์ รักวิชาชีพ (สย. 99999)">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">ประเภทโครงสร้างคอนกรีตฐานรองรับ</label>
+                        <select id="support_type" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="calculate()">
+                            <option value="pedestal">เสาตอม่อคอนกรีต (Concrete Pedestal)</option>
+                            <option value="beam">คานคอนกรีตเสริมเหล็ก (Concrete Beam)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">สถาปัตยกรรมจุดต่อเหล็ก</label>
+                        <select id="connection_type" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="toggleConnectionType()">
+                            <option value="column">จุดต่อเสาอาคาร (Column Base Plate)</option>
+                            <option value="beam">จุดต่อคานแบร็กเก็ต (Beam Connection Bracket)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loads Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-semibold text-indigo-400 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77.192-3 1.732-3z" /></svg>
+                    น้ำหนักบรรทุกใช้งาน (Service Loads)
+                </h2>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div class="col-span-2">
+                        <label class="block text-slate-400 mb-1" id="load_p_label">แรงดึง/แรงกดแนวแกน (P) [kg]</label>
+                        <input type="number" id="load_p" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="8500" oninput="calculate()">
+                    </div>
+                    <div id="div_mx">
+                        <label class="block text-slate-400 mb-1">โมเมนต์แกน X (Mx) [kg-m]</label>
+                        <input type="number" id="load_mx" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="1200" oninput="calculate()">
+                    </div>
+                    <div id="div_my">
+                        <label class="block text-slate-400 mb-1">โมเมนต์แกน Y (My) [kg-m]</label>
+                        <input type="number" id="load_my" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="800" oninput="calculate()">
+                    </div>
+                    <div id="div_v" class="col-span-2 hidden">
+                        <label class="block text-slate-400 mb-1">แรงเฉือนในแนวดิ่ง (V) [kg]</label>
+                        <input type="number" id="load_v" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="3500" oninput="calculate()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Steel Section Selection Card -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-semibold text-emerald-400 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H5a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4zM14 16a2 2 0 012-2h2a2 2 0 012 2v4a2 2 0 01-2 2h-2a2 2 0 01-2-2v-4z" /></svg>
+                    หน้าตัดเหล็กโครงสร้างเสา (Steel Profile)
+                </h2>
+                <div class="space-y-3 text-sm">
+                    <div>
+                        <label class="block text-slate-400 mb-1">ประเภทหน้าตัดเหล็ก</label>
+                        <select id="steel_shape_type" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="updateSteelSectionDropdown()">
+                            <option value="SHS">เหล็กกล่องสี่เหลี่ยมจัตุรัส (SHS)</option>
+                            <option value="RHS">เหล็กกล่องแบนสี่เหลี่ยมผืนผ้า (RHS)</option>
+                            <option value="H_BEAM">H-BEAM / I-BEAM</option>
+                            <option value="Channel">เหล็กรางน้ำเดี่ยว (C-Channel)</option>
+                            <option value="Channel_Double">เหล็กรางน้ำประกบคู่ (Double Channel)</option>
+                            <option value="Lightlip">เหล็กตัวซีพับขอบเดี่ยว (Light Lip C)</option>
+                            <option value="Lightlip_Double">เหล็กตัวซีพับขอบประกบคู่ (Double Lip C)</option>
+                            <option value="Pipe">เหล็กท่อกลม (Circular Pipe)</option>
+                            <option value="Angle">เหล็กฉากเดี่ยว (Angle)</option>
+                            <option value="Angle_Double">เหล็กฉากประกอบคู่ (Double Angle)</option>
+                        </select>
+                    </div>
+                    <div id="div_builtup_style" class="hidden">
+                        <label class="block text-slate-400 mb-1 text-xs font-bold text-amber-400">รูปแบบการประกบคู่เหล็ก (Built-up Style)</label>
+                        <select id="builtup_style" class="w-full bg-slate-800 border border-amber-500/50 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="calculate()">
+                            <option value="F2F">หันหน้าชนกัน (Face-to-Face / Box-shape)</option>
+                            <option value="B2B">หันหลังชนกัน (Back-to-Back / I-shape)</option>
+                        </select>
+                    </div>
+                    <div id="div_builtup_style_angle" class="hidden">
+                        <label class="block text-slate-400 mb-1 text-xs font-bold text-amber-400">รูปแบบการประกบคู่เหล็กฉาก</label>
+                        <select id="builtup_style_angle" class="w-full bg-slate-800 border border-amber-500/50 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="calculate()">
+                            <option value="B2B">หันหลังชนกัน (Back-to-Back / T-shape)</option>
+                            <option value="STAR">ประกบสี่แฉกเป็นแกนรูปดวงดาว (Star-Shape)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">โมเดลหน้าตัดมาตรฐาน มอก.</label>
+                        <select id="steel_section_select" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="calculate()">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Base Plate & Anchor Bolts Configuration -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-semibold text-indigo-400 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" /></svg>
+                    เหล็กประกับเพลท & เหล็กเดือย (Base Plate & Bolts)
+                </h2>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div>
+                        <label class="block text-slate-400 mb-1">ความกว้างเพลท Bp [mm]</label>
+                        <input type="number" id="plate_b" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="400" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">ความลึกเพลท Dp [mm]</label>
+                        <input type="number" id="plate_d" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="400" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">เกรดเหล็กเดือย</label>
+                        <select id="bolt_grade" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="calculate()">
+                            <option value="A36">A36 (SS400)</option>
+                            <option value="A325">A325 (High Strength)</option>
+                            <option value="G4.6">Grade 4.6</option>
+                            <option value="G8.8">Grade 8.8</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">ขนาดเหล็กเดือย</label>
+                        <select id="bolt_dia" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="calculate()">
+                            <option value="12">M12</option>
+                            <option value="16" selected>M16</option>
+                            <option value="20">M20</option>
+                            <option value="22">M22</option>
+                            <option value="24">M24</option>
+                            <option value="30">M30</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">จำนวนแถว แกน X (Nx)</label>
+                        <input type="number" id="bolt_nx" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="2" min="2" max="6" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">จำนวนแถว แกน Y (Ny)</label>
+                        <input type="number" id="bolt_ny" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="2" min="2" max="6" oninput="calculate()">
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-emerald-400 font-semibold mb-1" id="bolt_offset_label">ระยะจากขอบเสา/คานคอนกรีตถึงกึ่งกลาง Bolt (c_bolt) [mm]</label>
+                        <input type="number" id="bolt_offset_from_col" class="w-full bg-slate-800 border border-emerald-700/60 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-emerald-500" value="110" min="20" oninput="calculate()">
+                        <span class="text-[10px] text-slate-400 mt-1 block" id="bolt_offset_desc">ระยะนี้จะถูกวัดจากขอบเสาคอนกรีตด้านนอกสุดเข้ามาหาพิกัดกึ่งกลางของสลักเกลียวเดือย</span>
+                    </div>
+                    <div class="col-span-2">
+                        <label class="block text-slate-400 mb-1">ระยะฝังลึกประสิทธิผล (hef) [mm]</label>
+                        <input type="number" id="bolt_hef" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="300" min="50" oninput="calculate()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pedestal/Beam & Reinforcement Configuration -->
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl">
+                <h2 class="text-base font-semibold text-indigo-400 mb-4 flex items-center gap-2" id="sec_support_title">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" /></svg>
+                    กำลังวัสดุ & เหล็กเสริมในคาน/เสา
+                </h2>
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                    <div>
+                        <label class="block text-slate-400 mb-1" id="lbl_width">ความกว้างคาน/เสา Bc [mm]</label>
+                        <input type="number" id="ped_b" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="500" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1" id="lbl_depth">ความสูงคาน/เสา Dc [mm]</label>
+                        <input type="number" id="ped_d" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="500" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">fc' คอนกรีต [ksc-Cylinder]</label>
+                        <input type="number" id="ped_fc" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="280" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">fy เหล็กเสริมหลัก [ksc]</label>
+                        <input type="number" id="rebar_fy" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="4000" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1" id="lbl_rebar_x">จำนวนเหล็กหลักคาน/เสา แกน X</label>
+                        <input type="number" id="rebar_nx" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="4" min="2" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1" id="lbl_rebar_y">จำนวนเหล็กหลักคาน/เสา แกน Y</label>
+                        <input type="number" id="rebar_ny" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="4" min="2" oninput="calculate()">
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1">ขนาดเหล็กเสริมหลัก</label>
+                        <select id="rebar_dia" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" onchange="calculate()">
+                            <option value="12">DB12</option>
+                            <option value="16" selected>DB16</option>
+                            <option value="20">DB20</option>
+                            <option value="25">DB25</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-slate-400 mb-1" id="lbl_stirrups">จำนวนชั้นเหล็กปลอก</label>
+                        <input type="number" id="stirrup_layers" class="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none" value="3" min="1" oninput="calculate()">
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Right Panel: Design & Output Visualization -->
+        <main class="lg:col-span-8 space-y-6">
+            <!-- Unit Selector (Mpa vs Ksc vs kg/cm2) -->
+            <section class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col md:flex-row justify-between items-center gap-4 no-print">
+                <div class="flex items-center gap-2">
+                    <span class="inline-block w-3 h-3 rounded-full bg-indigo-500"></span>
+                    <span class="text-xs font-semibold text-slate-400">เลือกหน่วยที่ใช้ในการตรวจสอบและแสดงรายงาน:</span>
+                </div>
+                <div class="inline-flex rounded-lg border border-slate-800 bg-slate-950 p-0.5">
+                    <button id="unit_btn_ksc" onclick="changeUnitSystem('ksc')" class="px-4 py-1.5 text-xs font-bold rounded-md transition bg-indigo-600 text-white">ksc (kg/cm²)</button>
+                    <button id="unit_btn_mpa" onclick="changeUnitSystem('mpa')" class="px-4 py-1.5 text-xs font-bold rounded-md transition text-slate-400 hover:text-white">MPa (N/mm²)</button>
+                    <button id="unit_btn_kg" onclick="changeUnitSystem('kg')" class="px-4 py-1.5 text-xs font-bold rounded-md transition text-slate-400 hover:text-white">kg (หน่วยแรงสัมบูรณ์)</button>
+                </div>
+            </section>
+
+            <!-- Summary Dashboard Card -->
+            <section class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between shadow-lg">
+                    <span class="text-xs text-slate-400 font-medium">กำลังดึงวิกฤตสูงสุด (Tmax)</span>
+                    <span id="txt_tmax" class="text-2xl font-bold text-amber-400 code-font mt-2">0.00 kg</span>
+                    <span class="text-[10px] text-slate-500 mt-1">แรงดึงใช้งานสูงสุดต่อตัวนอกสุด</span>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between shadow-lg">
+                    <span class="text-xs text-slate-400 font-medium" id="lbl_tallow">กำลังดึงของเดือยที่ยอมให้ (Allowable T)</span>
+                    <span id="txt_tallow" class="text-2xl font-bold text-indigo-400 code-font mt-2">0.00 kg</span>
+                    <span class="text-[10px] text-slate-500 mt-1">กำลังวัสดุตัวเกลียวเดือย</span>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between shadow-lg">
+                    <span class="text-xs text-slate-400 font-medium">Concrete Breakout (Ncb)</span>
+                    <span id="txt_ncb" class="text-2xl font-bold text-emerald-400 code-font mt-2">0.00 kg</span>
+                    <span class="text-[10px] text-slate-500 mt-1">กำลังคอนกรีตดึงหลุดทรงกรวย</span>
+                </div>
+                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 flex flex-col justify-between shadow-lg">
+                    <span class="text-xs text-slate-400 font-medium">อัตราส่วนความเค้น (Stress Ratio)</span>
+                    <div class="flex items-center gap-2 mt-2">
+                        <span id="txt_ratio" class="text-2xl font-bold text-emerald-400 code-font">0.00</span>
+                        <span id="badge_status" class="bg-emerald-950/40 text-emerald-400 text-xs px-2 py-0.5 rounded font-bold">PASS</span>
+                    </div>
+                    <span class="text-[10px] text-slate-500 mt-1">Tmax / Allowable Capacity</span>
+                </div>
+            </section>
+
+            <!-- Dynamic SVG Previews -->
+            <section class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl print-card">
+                <h3 class="text-sm font-semibold text-white mb-4 flex items-center justify-between">
+                    <span class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                        แบบพรีวิวโครงสร้างสเกลจริง (Interactive Scale Drawing)
+                    </span>
+                    <span class="text-xs text-slate-400 font-normal no-print">แสดงผลฐานรองรับและเหล็กเดือยตรงตามสเกลสากล</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Top Plan View -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-3 flex flex-col items-center">
+                        <span class="text-xs text-slate-400 mb-2 font-medium" id="plan_view_title">แปลนจัดวางกลุ่ม Bolt และขอบคอนกรีตเสาตอม่อ (Top Plan View)</span>
+                        <div id="svg_plan_container" class="w-full max-w-[345px] h-[345px] flex items-center justify-center">
+                            <!-- Injected Dynamically -->
+                        </div>
+                    </div>
+                    <!-- Sectional Elevation View -->
+                    <div class="bg-slate-950 border border-slate-800 rounded-lg p-3 flex flex-col items-center">
+                        <span class="text-xs text-slate-400 mb-2 font-medium">รูปตัดรายละเอียดการฝังเหล็กแนวข้าง (Section View)</span>
+                        <div id="svg_section_container" class="w-full max-w-[345px] h-[345px] flex items-center justify-center">
+                            <!-- Injected Dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Table of forces in each individual bolt -->
+            <section class="bg-slate-900 border border-slate-800 rounded-xl p-5 shadow-xl print-card">
+                <h3 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" /></svg>
+                    ตารางสรุปแรงและกำลังต้านทานรายเส้น (Individual Bolt Performance Table)
+                </h3>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left text-slate-300">
+                        <thead class="bg-slate-950 text-slate-400 uppercase tracking-wider">
+                            <tr>
+                                <th class="p-2.5">รหัสเดือย (Bolt ID)</th>
+                                <th class="p-2.5">ตำแหน่งพิกัด X, Y [mm]</th>
+                                <th class="p-2.5">แรงดึงจริง (T_actual)</th>
+                                <th class="p-2.5">กำลังทนทานยอมให้</th>
+                                <th class="p-2.5">อัตราส่วนหน่วยแรง</th>
+                                <th class="p-2.5 text-center">สถานะเหล็กเดือย</th>
+                            </tr>
+                        </thead>
+                        <tbody id="individual_bolts_tbody" class="divide-y divide-slate-800">
+                            <!-- Injected Dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Printable Calculate Sheet (Textbook-Style) -->
+            <article class="bg-slate-900 border border-slate-800 rounded-xl p-6 shadow-xl print-card space-y-6">
+                <!-- Report Header -->
+                <div class="border-b border-slate-800 pb-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs font-bold text-indigo-400 tracking-wider uppercase">เอกสารส่งมอบรายการคำนวณทางวิศวกรรม</span>
+                            <h2 class="text-lg font-bold text-white mt-1">รายการคำนวณกำลัง Anchor Bolt & Reinforcement</h2>
+                            <p class="text-xs text-slate-400 mt-1">มาตรฐานการวิเคราะห์: AISC Steel Construction Manual - Allowable Stress Design (ASD) และ ACI 318</p>
+                        </div>
+                        <div class="text-right text-xs text-slate-400 space-y-1">
+                            <p><strong>โครงการ:</strong> <span class="text-white" id="rep_project">-</span></p>
+                            <p><strong>เจ้าของโครงการ:</strong> <span class="text-white" id="rep_owner">-</span></p>
+                            <p><strong>สถานที่:</strong> <span class="text-white" id="rep_location">-</span></p>
+                            <p><strong>วิศวกรผู้ออกแบบ:</strong> <span class="text-white" id="rep_engineer">-</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detailed Steps -->
+                <div class="space-y-6 text-sm text-slate-300">
+                    <!-- Step 1 -->
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-2 uppercase">1. ข้อมูลนำเข้าของโครงสร้างทางเรขาคณิตและพิกัดวัสดุ</h4>
+                        <table class="w-full text-xs text-left text-slate-400 border-collapse border border-slate-800 rounded-lg overflow-hidden">
+                            <thead class="bg-slate-950 text-slate-300">
+                                <tr>
+                                    <th class="p-2.5 border-b border-slate-800">สัญลักษณ์</th>
+                                    <th class="p-2.5 border-b border-slate-800">คำอธิบายพารามิเตอร์</th>
+                                    <th class="p-2.5 border-b border-slate-800">ค่าคำนวณที่ใช้</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800 text-slate-300">
+                                <tr>
+                                    <td class="p-2.5 code-font">$d_{bolt}$</td>
+                                    <td class="p-2.5">เส้นผ่านศูนย์กลางแกนเหล็กเดือยประสิทธิผล</td>
+                                    <td class="p-2.5 font-semibold text-indigo-400" id="tb_bolt_dia">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 code-font">$F_y, F_u$</td>
+                                    <td class="p-2.5">กำลังวัสดุจุดคราวด์และต้านทานดึงสูงสุด</td>
+                                    <td class="p-2.5 font-semibold text-indigo-400" id="tb_bolt_strength">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 code-font">มิติเสาเหล็ก $B_{col} \times D_{col}$</td>
+                                    <td class="p-2.5">ขนาดหน้าตัดเสาเหล็กโครงสร้างรูปพรรณ (ตามแกน X และ Y)</td>
+                                    <td class="p-2.5 font-semibold text-indigo-400" id="tb_col_size">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 code-font" id="lbl_tb_bolt_offset">$c_{bolt}$</td>
+                                    <td class="p-2.5" id="lbl_tb_bolt_offset_desc">ระยะจากขอบเสาคอนกรีตตอม่อด้านนอกเข้ามาถึงแกน Bolt</td>
+                                    <td class="p-2.5 font-semibold text-emerald-400" id="tb_bolt_offset">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 code-font">$h_{ef}$</td>
+                                    <td class="p-2.5">ระยะฝังตัวประสิทธิผลของเหล็กเดือยในตอม่อ/คาน</td>
+                                    <td class="p-2.5 font-semibold text-indigo-400" id="tb_hef">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2.5 code-font">$f'_c$</td>
+                                    <td class="p-2.5">กำลังรับกำลังกดคอนกรีตที่ระบุ (Cylinder)</td>
+                                    <td class="p-2.5 font-semibold text-indigo-400" id="tb_fc">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-2 uppercase" id="lbl_step2_title">2. การคำนวณและวิเคราะห์ระบบพิกัดกลุ่มเหล็กเดือยขอบนอก ($I_{group}$)</h4>
+                        <p class="text-xs mb-3 text-slate-400 leading-relaxed" id="lbl_step2_desc">
+                            ระบบพิกัดอ้างอิงจุดศูนย์กลางแผ่นเพลทและเสาคอนกรีตอยู่ที่พิกัด $(0,0)$ สำหรับเสาคอนกรีตขนาดกว้าง $B_c$ แนวขอบนอกสุดจะอยู่ที่ $X = \pm B_c/2$ และ $Y = \pm D_c/2$ เมื่อกำหนดระยะจากขอบเสาคอนกรีตตอม่อด้านนอกเข้ามาถึงแกนสลักเกลียวเท่ากับ $c_{bolt}$ พิกัดแนวเหล็กเดือยจะกลายเป็น:
+                        </p>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 math-box flex flex-col gap-3 font-light text-xs">
+                            <div id="eq_coord_calc"></div>
+                            <div id="eq_total_bolts"></div>
+                            <div id="eq_group_inertia"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-2 uppercase">3. ตรรกะสมการหาหน่วยแรงดึงรายเส้นและสลักเกลียววิกฤตสูงสุด</h4>
+                        <p class="text-xs mb-3 text-slate-400 leading-relaxed">
+                            โดยใช้ทฤษฎีกลศาสตร์หน้าตัดคาน (Elastic Flexural Theory) ในกลุ่มเหล็กเดือยที่ทำงานประสานกัน:
+                        </p>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 math-box flex flex-col gap-3 font-light text-xs">
+                            <div id="eq_stress_general"></div>
+                            <div id="eq_stress_individual_steps" class="space-y-2">
+                                <!-- Step by step substitions will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-2 uppercase">4. ตรวจสอบขีดความปลอดภัยของแรงดึงที่ยอมให้บนตัวเหล็ก (AISC-ASD)</h4>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 math-box flex flex-col gap-3 font-light text-xs">
+                            <div id="eq_allowable_calc"></div>
+                            <div id="eq_allowable_status"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-2 uppercase" id="lbl_step5_title">5. ตรวจสอบกำลังรับแรงต้านดึงหลุดทรงกรวยคอนกรีต (Concrete Breakout - ACI 318)</h4>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 math-box flex flex-col gap-3 font-light text-xs">
+                            <div id="eq_concrete_breakout"></div>
+                            <div id="eq_concrete_status"></div>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 -->
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-2 uppercase" id="lbl_step6_title">6. การคำนวณความต้องการกำลังเหล็กเสริมแนวดิ่งในตอม่อเสา/คาน</h4>
+                        <p class="text-xs mb-3 text-slate-400 leading-relaxed" id="lbl_step6_desc">
+                            คำนวณพื้นที่เหล็กเสริมในเสาตอม่อจริงและค่าการกระจายแรงดึงสูงสุดเพื่อป้องกันตอม่อฉีกขาด:
+                        </p>
+                        <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 math-box flex flex-col gap-3 font-light text-xs">
+                            <div id="eq_rebar_area"></div>
+                            <div id="eq_rebar_allowable"></div>
+                            <div id="eq_rebar_status"></div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Verification Table -->
+                    <div>
+                        <h4 class="text-sm font-bold text-white mb-2 uppercase">สรุปการประเมินค่าผลลัพธ์การคำนวณ</h4>
+                        <table class="w-full text-xs text-left border-collapse border border-slate-800 rounded-lg overflow-hidden">
+                            <thead class="bg-slate-950 text-slate-300">
+                                <tr>
+                                    <th class="p-2.5">ดัชนีตรวจเช็คการออกแบบ</th>
+                                    <th class="p-2.5">แรงจริงที่เกิด ($f_{actual}$)</th>
+                                    <th class="p-2.5">กำลังทนทานยอมให้ ($F_{allow}$)</th>
+                                    <th class="p-2.5">สัดส่วนแรงเค้น (Ratio)</th>
+                                    <th class="p-2.5 text-center">สถานะ</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-800 text-slate-300" id="summary_table_body">
+                                <!-- Summary rows injected dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Signature Panel -->
+                    <div class="pt-8 grid grid-cols-2 gap-4 text-xs">
+                        <div class="border-t border-dashed border-slate-700 pt-4 text-center">
+                            <p class="text-slate-400">....................................................................</p>
+                            <p class="font-medium text-white mt-1" id="sig_engineer">วิศวกรผู้คำนวณและออกแบบ</p>
+                            <p class="text-slate-500 mt-0.5">ใบอนุญาตเลขที่ ภย./สย. .....................................</p>
+                        </div>
+                        <div class="border-t border-dashed border-slate-700 pt-4 text-center">
+                            <p class="text-slate-400">....................................................................</p>
+                            <p class="font-medium text-white mt-1">วิศวกรผู้ตรวจสอบโครงสร้าง</p>
+                            <p class="text-slate-500 mt-0.5">ใบอนุญาตเลขที่ สย./วย. .....................................</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <!-- Script Block -->
+    <script>
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'anchor-bolt-designer-pro';
+
+        // Unit System Configuration
+        let currentUnit = 'ksc'; // 'ksc' or 'mpa' or 'kg'
+
+        const BOLT_GRADES = {
+            'A36': { fy: 2500, fu: 4000, desc: 'Carbon Steel SS400' },
+            'A325': { fy: 6400, fu: 8300, desc: 'High-Strength Carbon' },
+            'G4.6': { fy: 2400, fu: 4000, desc: 'Grade 4.6' },
+            'G8.8': { fy: 6400, fu: 8000, desc: 'Grade 8.8' }
+        };
+
+        const BOLT_SIZES = {
+            '12': { d: 12, area: 1.13, rootArea: 0.843 },
+            '16': { d: 16, area: 2.01, rootArea: 1.57 },
+            '20': { d: 20, area: 3.14, rootArea: 2.45 },
+            '22': { d: 22, area: 3.80, rootArea: 3.03 },
+            '24': { d: 24, area: 4.52, rootArea: 3.53 },
+            '30': { d: 30, area: 7.07, rootArea: 5.61 }
+        };
+
+        // Comprehensive Database for steel profile shapes, now with built-up / double profile configurations
+        const STEEL_PROFILES = {
+            'SHS': {
+                name: 'เหล็กกล่องจัตุรัส (Square Hollow Section)',
+                sizes: [
+                    { label: 'SHS 100x100x3.2', bx: 100, dy: 100, t: 3.2, area: 12.01 },
+                    { label: 'SHS 125x125x4.5', bx: 125, dy: 125, t: 4.5, area: 21.05 },
+                    { label: 'SHS 150x150x4.5', bx: 150, dy: 150, t: 4.5, area: 25.55 },
+                    { label: 'SHS 200x200x6.0', bx: 200, dy: 200, t: 6.0, area: 45.10 }
+                ]
+            },
+            'RHS': {
+                name: 'เหล็กกล่องผืนผ้า (Rectangular Hollow Section)',
+                sizes: [
+                    { label: 'RHS 150x100x4.5', bx: 150, dy: 100, t: 4.5, area: 21.05 },
+                    { label: 'RHS 200x100x4.5', bx: 200, dy: 100, t: 4.5, area: 25.55 },
+                    { label: 'RHS 250x150x6.0', bx: 250, dy: 150, t: 6.0, area: 45.10 },
+                    { label: 'RHS 300x200x9.0', bx: 300, dy: 200, t: 9.0, area: 84.10 }
+                ]
+            },
+            'H_BEAM': {
+                name: 'เหล็กไวด์แฟลงก์/ไอบีม (H-Beam / I-Beam)',
+                sizes: [
+                    { label: 'H 150x150x7x10', bx: 150, dy: 150, t: 7.0, area: 39.65 },
+                    { label: 'H 200x200x8x12', bx: 200, dy: 200, t: 8.0, area: 63.53 },
+                    { label: 'H 250x250x9x14', bx: 250, dy: 250, t: 9.0, area: 91.43 },
+                    { label: 'H 300x300x10x15', bx: 300, dy: 300, t: 10.0, area: 118.4 }
+                ]
+            },
+            'Channel': {
+                name: 'เหล็กรางน้ำเดี่ยว (C-Channel)',
+                sizes: [
+                    { label: 'C 100x50x5x7.5', bx: 100, dy: 50, t: 5.0, area: 11.92 },
+                    { label: 'C 150x75x6.5x10', bx: 150, dy: 75, t: 6.5, area: 23.71 },
+                    { label: 'C 200x80x7.5x11', bx: 200, dy: 80, t: 7.5, area: 31.25 }
+                ]
+            },
+            'Channel_Double': {
+                name: 'เหล็กรางน้ำประกบคู่ (Double Channel)',
+                sizes: [
+                    { label: '2 x C 100x50x5', bx: 100, dy: 100, t: 5.0, area: 23.84 },
+                    { label: '2 x C 150x75x6.5', bx: 150, dy: 150, t: 6.5, area: 47.42 },
+                    { label: '2 x C 200x80x7.5', bx: 200, dy: 160, t: 7.5, area: 62.50 }
+                ]
+            },
+            'Lightlip': {
+                name: 'เหล็กตัวซีพับขอบเดี่ยว (Light Lip C)',
+                sizes: [
+                    { label: 'C 75x45x15x2.3', bx: 75, dy: 45, t: 2.3, area: 3.44 },
+                    { label: 'C 100x50x20x3.2', bx: 100, dy: 50, t: 3.2, area: 6.13 },
+                    { label: 'C 125x50x20x3.2', bx: 125, dy: 50, t: 3.2, area: 6.93 },
+                    { label: 'C 150x50x20x4.5', bx: 150, dy: 50, t: 4.5, area: 11.02 }
+                ]
+            },
+            'Lightlip_Double': {
+                name: 'เหล็กตัวซีพับขอบประกบคู่ (Double Lip C)',
+                sizes: [
+                    { label: '2 x C 75x45x15x2.3', bx: 75, dy: 90, t: 2.3, area: 6.88 },
+                    { label: '2 x C 100x50x20x3.2', bx: 100, dy: 100, t: 3.2, area: 12.26 },
+                    { label: '2 x C 125x50x20x3.2', bx: 125, dy: 100, t: 3.2, area: 13.86 },
+                    { label: '2 x C 150x50x20x4.5', bx: 150, dy: 100, t: 4.5, area: 22.04 }
+                ]
+            },
+            'Pipe': {
+                name: 'เหล็กท่อกลม (Circular Pipe)',
+                sizes: [
+                    { label: 'Pipe Ø 89.1x3.2 (3")', bx: 89.1, dy: 89.1, t: 3.2, area: 8.64 },
+                    { label: 'Pipe Ø 114.3x4.5 (4")', bx: 114.3, dy: 114.3, t: 4.5, area: 15.52 },
+                    { label: 'Pipe Ø 139.8x4.5 (5")', bx: 139.8, dy: 139.8, t: 4.5, area: 19.13 },
+                    { label: 'Pipe Ø 165.2x5.0 (6")', bx: 165.2, dy: 165.2, t: 5.0, area: 25.16 }
+                ]
+            },
+            'Angle': {
+                name: 'เหล็กฉากเดี่ยว (Angle)',
+                sizes: [
+                    { label: 'L 50x50x4', bx: 50, dy: 50, t: 4.0, area: 3.89 },
+                    { label: 'L 75x75x6', bx: 75, dy: 75, t: 6.0, area: 8.73 },
+                    { label: 'L 100x100x10', bx: 100, dy: 100, t: 10.0, area: 19.10 }
+                ]
+            },
+            'Angle_Double': {
+                name: 'เหล็กฉากประกอบคู่ (Double Angle)',
+                sizes: [
+                    { label: '2 x L 50x50x4', bx: 50, dy: 100, t: 4.0, area: 7.78 },
+                    { label: '2 x L 75x75x6', bx: 75, dy: 150, t: 6.0, area: 17.46 },
+                    { label: '2 x L 100x100x10', bx: 100, dy: 200, t: 10.0, area: 38.20 }
+                ]
+            }
+        };
+
+        function changeUnitSystem(unit) {
+            currentUnit = unit;
+            ['ksc', 'mpa', 'kg'].forEach(u => {
+                const btn = document.getElementById(`unit_btn_${u}`);
+                if (btn) {
+                    if (u === unit) {
+                        btn.className = "px-4 py-1.5 text-xs font-bold rounded-md transition tab-transition bg-indigo-600 text-white";
+                    } else {
+                        btn.className = "px-4 py-1.5 text-xs font-bold rounded-md transition tab-transition text-slate-400 hover:text-white";
+                    }
+                }
+            });
+            calculate();
+        }
+
+        function formatVal(kgVal, isStress = false) {
+            if (currentUnit === 'mpa') {
+                if (isStress) {
+                    return (kgVal * 0.09807).toFixed(2) + ' MPa';
+                } else {
+                    return (kgVal * 0.009807).toFixed(2) + ' kN';
+                }
+            } else if (currentUnit === 'kg') {
+                if (isStress) {
+                    return kgVal.toFixed(1) + ' kg/cm²';
+                } else {
+                    return kgVal.toFixed(0) + ' kg';
+                }
+            } else {
+                if (isStress) {
+                    return kgVal.toFixed(1) + ' ksc';
+                } else {
+                    return kgVal.toFixed(0) + ' kg';
+                }
+            }
+        }
+
+        function updateSteelSectionDropdown() {
+            const shapeType = document.getElementById('steel_shape_type').value;
+            const dropdown = document.getElementById('steel_section_select');
+            if (!dropdown) return;
+
+            dropdown.innerHTML = '';
+            STEEL_PROFILES[shapeType].sizes.forEach((size, idx) => {
+                const opt = document.createElement('option');
+                opt.value = idx;
+                opt.innerText = size.label;
+                dropdown.appendChild(opt);
+            });
+
+            // Toggle visibility of built-up style options based on selected profile
+            const divBuiltup = document.getElementById('div_builtup_style');
+            const divBuiltupAngle = document.getElementById('div_builtup_style_angle');
+            
+            if (shapeType === 'Channel_Double' || shapeType === 'Lightlip_Double') {
+                if (divBuiltup) divBuiltup.classList.remove('hidden');
+                if (divBuiltupAngle) divBuiltupAngle.classList.add('hidden');
+            } else if (shapeType === 'Angle_Double') {
+                if (divBuiltup) divBuiltup.classList.add('hidden');
+                if (divBuiltupAngle) divBuiltupAngle.classList.remove('hidden');
+            } else {
+                if (divBuiltup) divBuiltup.classList.add('hidden');
+                if (divBuiltupAngle) divBuiltupAngle.classList.add('hidden');
+            }
+
+            calculate();
+        }
+
+        function toggleConnectionType() {
+            const type = document.getElementById('connection_type').value;
+            const divMx = document.getElementById('div_mx');
+            const divMy = document.getElementById('div_my');
+            const divV = document.getElementById('div_v');
+            const labelP = document.getElementById('load_p_label');
+
+            if (!divMx || !divMy || !divV || !labelP) return;
+
+            if (type === 'beam') {
+                divMx.classList.add('hidden');
+                divMy.classList.add('hidden');
+                divV.classList.remove('hidden');
+                labelP.innerText = 'แรงดึงที่เกิดขึ้นใช้งาน (P) [kg]';
+            } else {
+                divMx.classList.remove('hidden');
+                divMy.classList.remove('hidden');
+                divV.classList.add('hidden');
+                labelP.innerText = 'แรงดึง/แรงกดแนวแกน (P) [kg]';
+            }
+            calculate();
+        }
+
+        function calculate() {
+            // Gather Project and Metadata
+            const projName = document.getElementById('project_name').value || '-';
+            const projOwner = document.getElementById('project_owner').value || '-';
+            const projLoc = document.getElementById('project_location').value || '-';
+            const engName = document.getElementById('engineer_name').value || '-';
+
+            const repProj = document.getElementById('rep_project');
+            const repOwner = document.getElementById('rep_owner');
+            const repLoc = document.getElementById('rep_location');
+            const repEngineer = document.getElementById('rep_engineer');
+            const sigEngineer = document.getElementById('sig_engineer');
+
+            if (repProj) repProj.innerText = projName;
+            if (repOwner) repOwner.innerText = projOwner;
+            if (repLoc) repLoc.innerText = projLoc;
+            if (repEngineer) repEngineer.innerText = engName;
+            if (sigEngineer) sigEngineer.innerText = engName + " (วิศวกรผู้คำนวณ)";
+
+            // Technical Inputs
+            const supportType = document.getElementById('support_type').value; 
+            const connectionType = document.getElementById('connection_type').value;
+            const loadP = parseFloat(document.getElementById('load_p').value) || 0;
+            const loadMx = parseFloat(document.getElementById('load_mx').value) || 0;
+            const loadMy = parseFloat(document.getElementById('load_my').value) || 0;
+            const loadV = parseFloat(document.getElementById('load_v').value) || 0;
+
+            const plateB = parseFloat(document.getElementById('plate_b').value) || 400;
+            const plateD = parseFloat(document.getElementById('plate_d').value) || 400;
+
+            const gradeKey = document.getElementById('bolt_grade').value;
+            const boltGrade = BOLT_GRADES[gradeKey];
+            const sizeKey = document.getElementById('bolt_dia').value;
+            const boltSize = BOLT_SIZES[sizeKey];
+
+            const nx = parseInt(document.getElementById('bolt_nx').value) || 2;
+            const ny = parseInt(document.getElementById('bolt_ny').value) || 2;
+            const c_bolt = parseFloat(document.getElementById('bolt_offset_from_col').value) || 110;
+            const hef = parseFloat(document.getElementById('bolt_hef').value) || 300;
+
+            const pedB = parseFloat(document.getElementById('ped_b').value) || 500;
+            const pedD = parseFloat(document.getElementById('ped_d').value) || 500;
+
+            // Retrieve Steel Shape Parameters from active database selection
+            const shapeType = document.getElementById('steel_shape_type').value;
+            const sectionIdx = parseInt(document.getElementById('steel_section_select').value) || 0;
+            const selectedShape = STEEL_PROFILES[shapeType].sizes[sectionIdx];
+
+            const colWidthX = selectedShape.bx; // mm
+            const colWidthY = selectedShape.dy; // mm
+            const colThickness = selectedShape.t; // mm
+
+            const fc = parseFloat(document.getElementById('ped_fc').value) || 280;
+            const rebarFy = parseFloat(document.getElementById('rebar_fy').value) || 4000;
+            
+            const rebarNx = parseInt(document.getElementById('rebar_nx').value) || 4;
+            const rebarNy = parseInt(document.getElementById('rebar_ny').value) || 4;
+            const rebarSizeKey = document.getElementById('rebar_dia').value;
+            const rebarAreaSingle = Math.PI * Math.pow(parseFloat(rebarSizeKey)/10, 2) / 4; 
+            const totalRebarsCount = (rebarNx * 2) + ((rebarNy - 2) * 2);
+            const totalRebarArea = totalRebarsCount * rebarAreaSingle; 
+
+            const stirrupLayers = parseInt(document.getElementById('stirrup_layers').value) || 3;
+
+            const ab = boltSize.area; 
+            const anet = boltSize.rootArea; 
+
+            // Spacing calculations: measuring Bolt position INWARDS from the Concrete Pedestal/Support Edge
+            const sx = pedB - (2 * c_bolt); 
+            const sy = pedD - (2 * c_bolt); 
+
+            // Coordinates in cm
+            let xCoords = [];
+            for (let i = 0; i < nx; i++) {
+                xCoords.push((i - (nx - 1) / 2) * (sx / 10)); 
+            }
+            let yCoords = [];
+            for (let j = 0; j < ny; j++) {
+                yCoords.push((j - (ny - 1) / 2) * (sy / 10)); 
+            }
+
+            // Generate active boundary bolts (excluding strictly internal bolts)
+            let activeBolts = [];
+            let boltIndex = 1;
+            for (let j = ny - 1; j >= 0; j--) { 
+                for (let i = 0; i < nx; i++) {   
+                    if (i === 0 || i === nx - 1 || j === 0 || j === ny - 1) {
+                        activeBolts.push({
+                            id: `B${boltIndex}`,
+                            x: xCoords[i], 
+                            y: yCoords[j], 
+                            colIndex: i,
+                            rowIndex: j,
+                            tension: 0
+                        });
+                        boltIndex++;
+                    }
+                }
+            }
+
+            const totalBoltsCount = activeBolts.length;
+
+            // Compute moments of inertia
+            let sumX2 = 0;
+            let sumY2 = 0;
+            activeBolts.forEach(b => {
+                sumX2 += b.x * b.x;
+                sumY2 += b.y * b.y;
+            });
+
+            // Tension calculations for each individual bolt
+            let Tmax = 0;
+            activeBolts.forEach(b => {
+                let T_axial = loadP / totalBoltsCount;
+                let T_mx = 0;
+                let T_my = 0;
+
+                if (connectionType === 'column') {
+                    T_mx = sumY2 > 0 ? (loadMx * 100 * b.y) / sumY2 : 0;
+                    T_my = sumX2 > 0 ? (loadMy * 100 * b.x) / sumX2 : 0;
+                    b.tension = T_axial + T_mx + T_my;
+                } else {
+                    const d_eccentricity = 15; 
+                    const MomentBeam = loadV * d_eccentricity + loadP * (sy / 10);
+                    const dTensionArm = (sy / 10) * (ny - 1);
+                    const T_flex = (b.rowIndex === ny - 1) ? (MomentBeam / dTensionArm) / (nx > 1 ? 2 : 1) : 0;
+                    b.tension = T_axial + T_flex;
+                }
+
+                if (b.tension < 0) b.tension = 0;
+                if (b.tension > Tmax) Tmax = b.tension;
+            });
+
+            // Steel allowable limits
+            const Ft = 0.33 * boltGrade.fu; 
+            const T_allowable = Ft * anet; 
+
+            // Concrete breakout limit (ACI 318) with edge proximity
+            let psi_ed = 1.0;
+            const ca_min = c_bolt; 
+            if (ca_min < 1.5 * hef) {
+                psi_ed = 0.7 + 0.3 * (ca_min / (1.5 * hef));
+                if (psi_ed > 1.0) psi_ed = 1.0;
+            }
+            const Ncb_kg = (0.75 * 10 * psi_ed * Math.sqrt(fc) * Math.pow(hef, 1.5)) / 9.81;
+
+            // Pedestal Reinforcing main bars
+            const fs_allow = 0.5 * rebarFy; 
+            const Rebar_Capacity_Total = fs_allow * totalRebarArea; 
+
+            const steelRatio = Tmax / T_allowable;
+            const concreteRatio = Tmax / Ncb_kg;
+            const maxRatio = Math.max(steelRatio, concreteRatio);
+            const isPass = maxRatio <= 1.0;
+
+            // Output Card Formats
+            const txtTmax = document.getElementById('txt_tmax');
+            const txtTallow = document.getElementById('txt_tallow');
+            const txtNcb = document.getElementById('txt_ncb');
+            const lblTallow = document.getElementById('lbl_tallow');
+
+            if (txtTmax) txtTmax.innerText = formatVal(Tmax);
+            if (txtTallow) txtTallow.innerText = formatVal(T_allowable);
+            if (txtNcb) txtNcb.innerText = formatVal(Ncb_kg);
+            if (lblTallow) lblTallow.innerText = `กำลังดึงเดือยที่ยอมให้ (${currentUnit.toUpperCase()})`;
+            
+            const ratioElem = document.getElementById('txt_ratio');
+            const badgeElem = document.getElementById('badge_status');
+
+            if (ratioElem) {
+                ratioElem.innerText = maxRatio.toFixed(2);
+                if (isPass) {
+                    ratioElem.className = "text-2xl font-bold text-emerald-400 code-font";
+                    if (badgeElem) {
+                        badgeElem.className = "bg-emerald-950/40 text-emerald-400 text-xs px-2 py-0.5 rounded font-bold";
+                        badgeElem.innerText = "PASS";
+                    }
+                } else {
+                    ratioElem.className = "text-2xl font-bold text-rose-400 code-font";
+                    if (badgeElem) {
+                        badgeElem.className = "bg-rose-950/40 text-rose-400 text-xs px-2 py-0.5 rounded font-bold";
+                        badgeElem.innerText = "FAIL";
+                    }
+                }
+            }
+
+            // Populate table of individual bolts with adapted units
+            const tbody = document.getElementById('individual_bolts_tbody');
+            if (tbody) {
+                tbody.innerHTML = '';
+                activeBolts.forEach(b => {
+                    const ratio = b.tension / T_allowable;
+                    const bPass = ratio <= 1.0;
+                    tbody.innerHTML += `
+                        <tr class="hover:bg-slate-800 transition duration-150">
+                            <td class="p-2.5 font-bold text-amber-400 code-font">${b.id}</td>
+                            <td class="p-2.5 code-font">${(b.x*10).toFixed(0)}, ${(b.y*10).toFixed(0)}</td>
+                            <td class="p-2.5 font-semibold code-font text-white">${formatVal(b.tension)}</td>
+                            <td class="p-2.5 font-semibold code-font text-indigo-400">${formatVal(T_allowable)}</td>
+                            <td class="p-2.5 code-font ${bPass ? 'text-emerald-400' : 'text-rose-400'}">${ratio.toFixed(2)}</td>
+                            <td class="p-2.5 text-center">
+                                <span class="${bPass ? 'bg-emerald-950 text-emerald-400' : 'bg-rose-950 text-rose-400'} px-2 py-0.5 rounded font-bold text-[10px]">
+                                    ${bPass ? 'ปลอดภัย (OK)' : 'เกินพิกัด (FAIL)'}
+                                </span>
+                            </td>
+                        </tr>
+                    `;
+                });
+            }
+
+            // Update parameters table
+            const tbBoltDia = document.getElementById('tb_bolt_dia');
+            const tbBoltStrength = document.getElementById('tb_bolt_strength');
+            const tbBoltOffset = document.getElementById('tb_bolt_offset');
+            const tbHef = document.getElementById('tb_hef');
+            const tbFc = document.getElementById('tb_fc');
+            const tbRebarArea = document.getElementById('tb_rebar_area');
+            const tbColSize = document.getElementById('tb_col_size');
+
+            if (tbBoltDia) tbBoltDia.innerText = `M${sizeKey} (d = ${boltSize.d} mm, Area = ${ab.toFixed(2)} cm², Anet = ${anet.toFixed(3)} cm²)`;
+            if (tbBoltStrength) tbBoltStrength.innerText = `Fy = ${formatVal(boltGrade.fy, true)}, Fu = ${formatVal(boltGrade.fu, true)}`;
+            if (tbBoltOffset) tbBoltOffset.innerText = `${c_bolt} mm`;
+            if (tbHef) tbHef.innerText = `${hef} mm`;
+            if (tbFc) tbFc.innerText = `${formatVal(fc, true)}`;
+            if (tbRebarArea) tbRebarArea.innerText = `${totalRebarsCount} x DB${rebarSizeKey} (${totalRebarArea.toFixed(2)} cm²)`;
+            if (tbColSize) tbColSize.innerText = `${selectedShape.label} (หน้าตัดเหล็กชนิด ${shapeType})`;
+
+            // KaTeX Rendering updates
+            const supportVar = supportType === 'beam' ? 'B_b' : 'B_c';
+            safeKatexRender(
+                `X_{bolt} = \\pm \\left(\\frac{${supportVar}}{2} - c_{bolt}\\right) = \\pm \\left(\\frac{${pedB}}{2} - ${c_bolt}\\right) = \\pm ${(sx/2).toFixed(1)} \\text{ mm}`,
+                'eq_coord_calc', { displayMode: true }
+            );
+
+            safeKatexRender(
+                `\\text{จำนวนสลักเกลียวเดือยขอบรอบทั้งหมด: } N_{bolts} = ${totalBoltsCount} \\text{ ตัว (ตัดเหล็กช่วงกลางแนวแกนเสาออก)}`,
+                'eq_total_bolts', { displayMode: true }
+            );
+
+            safeKatexRender(
+                `\\sum x_i^2 = ${sumX2.toFixed(1)} \\text{ cm}^2, \\quad \\sum y_i^2 = ${sumY2.toFixed(1)} \\text{ cm}^2`,
+                'eq_group_inertia', { displayMode: true }
+            );
+
+            safeKatexRender(
+                `T_i = \\frac{P}{N_{bolts}} \\pm \\frac{M_x \\cdot y_i}{\\sum y_i^2} \\pm \\frac{M_y \\cdot x_i}{\\sum x_i^2}`,
+                'eq_stress_general', { displayMode: true }
+            );
+
+            // Populate equations for each individual bolt
+            let katexIndividualHTML = '';
+            activeBolts.forEach(b => {
+                const divId = `katex_eq_${b.id}`;
+                katexIndividualHTML += `<div id="${divId}" class="my-1 py-1 border-b border-dashed border-slate-800"></div>`;
+            });
+            
+            const eqStressIndividualSteps = document.getElementById('eq_stress_individual_steps');
+            if (eqStressIndividualSteps) {
+                eqStressIndividualSteps.innerHTML = katexIndividualHTML;
+
+                activeBolts.forEach(b => {
+                    const divId = `katex_eq_${b.id}`;
+                    const T_axial = loadP / totalBoltsCount;
+                    const T_mx = sumY2 > 0 ? (loadMx * 100 * b.y) / sumY2 : 0;
+                    const T_my = sumX2 > 0 ? (loadMy * 100 * b.x) / sumX2 : 0;
+                    const sign_mx = T_mx >= 0 ? '+' : '-';
+                    const sign_my = T_my >= 0 ? '+' : '-';
+
+                    safeKatexRender(
+                        `T_{${b.id}} = \\frac{${loadP}}{${totalBoltsCount}} ${sign_mx} \\frac{${(loadMx*100).toFixed(0)} \\times ${Math.abs(b.y).toFixed(1)}}{${sumY2.toFixed(1)}} ${sign_my} \\frac{${(loadMy*100).toFixed(0)} \\times ${Math.abs(b.x).toFixed(1)}}{${sumX2.toFixed(1)}} = ${formatVal(b.tension)}`,
+                        divId, { displayMode: false }
+                    );
+                });
+            }
+
+            // Yield stress representation
+            safeKatexRender(
+                `T_{allow} = F_t \\times A_{net} = (0.33 \\times F_u) \\times A_{net} = (0.33 \\times ${formatVal(boltGrade.fu, true)}) \\times ${anet.toFixed(3)} \\text{ cm}^2 = ${formatVal(T_allowable)}`,
+                'eq_allowable_calc', { displayMode: true }
+            );
+
+            safeKatexRender(
+                `T_{max} (${formatVal(Tmax)}) \\le T_{allow} (${formatVal(T_allowable)}) \\rightarrow \\mathbf{${steelRatio <= 1.0 ? 'PASSED' : 'FAILED'}}`,
+                'eq_allowable_status', { displayMode: true }
+            );
+
+            safeKatexRender(
+                `N_{cb} = \\phi \\times 10 \\times \\psi_{ed,N} \\times \\sqrt{f'_c} \\times h_{ef}^{1.5} / 9.81 = ${formatVal(Ncb_kg)}`,
+                'eq_concrete_breakout', { displayMode: true }
+            );
+
+            safeKatexRender(
+                `T_{max} (${formatVal(Tmax)}) \\le N_{cb} (${formatVal(Ncb_kg)}) \\rightarrow \\mathbf{${concreteRatio <= 1.0 ? 'PASSED' : 'FAILED'}}`,
+                'eq_concrete_status', { displayMode: true }
+            );
+
+            // Pedestal Reinforcement equations
+            safeKatexRender(
+                `A_{rebar} = N_{total} \\times A_{single} = ${totalRebarsCount} \\times ${rebarAreaSingle.toFixed(3)} = ${totalRebarArea.toFixed(2)} \\text{ cm}^2`,
+                'eq_rebar_area', { displayMode: true }
+            );
+
+            safeKatexRender(
+                `T_{rebar,allow} = 0.50 \\times f_y \\times A_{rebar} = 0.50 \\times ${formatVal(rebarFy, true)} \\times ${totalRebarArea.toFixed(2)} = ${formatVal(Rebar_Capacity_Total)}`,
+                'eq_rebar_allowable', { displayMode: true }
+            );
+
+            const totalTensionDemand = Tmax * totalBoltsCount;
+            safeKatexRender(
+                `T_{demand} (${formatVal(totalTensionDemand)}) \\le T_{rebar,allow} (${formatVal(Rebar_Capacity_Total)}) \\rightarrow \\mathbf{${totalTensionDemand <= Rebar_Capacity_Total ? 'PASSED' : 'FAILED'}}`,
+                'eq_rebar_status', { displayMode: true }
+            );
+
+            // Summary Table below Calculate Sheet
+            const summaryTableBody = document.getElementById('summary_table_body');
+            if (summaryTableBody) {
+                summaryTableBody.innerHTML = `
+                    <tr class="hover:bg-slate-800">
+                        <td class="p-2.5">กำลังดึงของเดือยเกลียว (Steel Tension Check)</td>
+                        <td class="p-2.5 code-font">${formatVal(Tmax)}</td>
+                        <td class="p-2.5 code-font">${formatVal(T_allowable)}</td>
+                        <td class="p-2.5 font-bold ${steelRatio <= 1.0 ? 'text-emerald-400' : 'text-rose-400'}">${steelRatio.toFixed(2)}</td>
+                        <td class="p-2.5 text-center"><span class="${steelRatio <= 1.0 ? 'bg-emerald-950 text-emerald-400' : 'bg-rose-950 text-rose-400'} text-[10px] px-2 py-0.5 rounded font-bold">${steelRatio <= 1.0 ? 'ผ่าน' : 'ไม่ผ่าน'}</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-800">
+                        <td class="p-2.5">กำลังคอนกรีตดึงหลุดสกัด (Concrete Breakout Check)</td>
+                        <td class="p-2.5 code-font">${formatVal(Tmax)}</td>
+                        <td class="p-2.5 code-font">${formatVal(Ncb_kg)}</td>
+                        <td class="p-2.5 font-bold ${concreteRatio <= 1.0 ? 'text-emerald-400' : 'text-rose-400'}">${concreteRatio.toFixed(2)}</td>
+                        <td class="p-2.5 text-center"><span class="${concreteRatio <= 1.0 ? 'bg-emerald-950 text-emerald-400' : 'bg-rose-950 text-rose-400'} text-[10px] px-2 py-0.5 rounded font-bold">${concreteRatio <= 1.0 ? 'ผ่าน' : 'ไม่ผ่าน'}</span></td>
+                    </tr>
+                    <tr class="hover:bg-slate-800">
+                        <td class="p-2.5">กำลังเหล็กเสริมดึงต้านทานร่วม (Rebar Tension Check)</td>
+                        <td class="p-2.5 code-font">${formatVal(totalTensionDemand)}</td>
+                        <td class="p-2.5 code-font">${formatVal(Rebar_Capacity_Total)}</td>
+                        <td class="p-2.5 font-bold ${totalTensionDemand <= Rebar_Capacity_Total ? 'text-emerald-400' : 'text-rose-400'}">${(totalTensionDemand / Rebar_Capacity_Total).toFixed(2)}</td>
+                        <td class="p-2.5 text-center"><span class="${totalTensionDemand <= Rebar_Capacity_Total ? 'bg-emerald-950 text-emerald-400' : 'bg-rose-950 text-rose-400'} text-[10px] px-2 py-0.5 rounded font-bold">${totalTensionDemand <= Rebar_Capacity_Total ? 'ผ่าน' : 'ไม่ผ่าน'}</span></td>
+                    </tr>
+                `;
+            }
+
+            drawPlans(nx, ny, sx, sy, pedB, pedD, rebarNx, rebarNy, sizeKey, rebarSizeKey, hef, stirrupLayers, plateB, plateD, colWidthX, colWidthY, activeBolts, c_bolt, Tmax, boltSize, supportType, shapeType, colThickness);
+        }
+
+        // SVG Renderer with high fidelity support for multi steel shapes & built-up (Box, H-Beam, Angle, Pipe, C-Channel, Lip-C, and B2B/F2F configurations)
+        function drawPlans(nx, ny, sx, sy, pedB, pedD, rebarNx, rebarNy, sizeKey, rebarSizeKey, hef, stirrupLayers, plateB, plateD, colWidthX, colWidthY, activeBolts, c_bolt, Tmax, boltSize, supportType, shapeType, colThickness) {
+            const maxDim = Math.max(pedB, pedD, plateB, plateD);
+            const scale = 220 / maxDim;
+
+            const cx = 170; 
+            const cy = 170; 
+
+            const pedW_px = pedB * scale;
+            const pedH_px = pedD * scale;
+            const pedX = cx - pedW_px / 2;
+            const pedY = cy - pedH_px / 2;
+
+            const plateW_px = plateB * scale;
+            const plateH_px = plateD * scale;
+            const plateX = cx - plateW_px / 2;
+            const plateY = cy - plateH_px / 2;
+
+            const colW_x_px = colWidthX * scale;
+            const colH_y_px = colWidthY * scale;
+            const colX = cx - colW_x_px / 2;
+            const colY = cx - colH_y_px / 2;
+            const colT_px = colThickness * scale;
+
+            function drawHVal(x1, x2, y, valText) {
+                return `
+                    <g stroke="#38bdf8" stroke-width="1" opacity="0.85">
+                        <line x1="${x1}" y1="${y}" x2="${x2}" y2="${y}"/>
+                        <line x1="${x1}" y1="${y - 4}" x2="${x1}" y2="${y + 4}"/>
+                        <line x1="${x2}" y1="${y - 4}" x2="${x2}" y2="${y + 4}"/>
+                    </g>
+                    <text x="${(x1 + x2) / 2}" y="${y - 4}" fill="#38bdf8" font-size="8" font-family="monospace" text-anchor="middle" font-weight="bold">${valText}</text>
+                `;
+            }
+
+            function drawVVal(x, y1, y2, valText) {
+                return `
+                    <g stroke="#38bdf8" stroke-width="1" opacity="0.85">
+                        <line x1="${x}" y1="${y1}" x2="${x}" y2="${y2}"/>
+                        <line x1="${x - 4}" y1="${y1}" x2="${x + 4}" y2="${y1}"/>
+                        <line x1="${x - 4}" y1="${y2}" x2="${x + 4}" y2="${y2}"/>
+                    </g>
+                    <text x="${x + 6}" y="${(y1 + y2) / 2 + 3}" fill="#38bdf8" font-size="8" font-family="monospace" text-anchor="start" font-weight="bold">${valText}</text>
+                `;
+            }
+
+            // --- PLAN VIEW ---
+            let planSvg = `<svg viewBox="0 0 340 340" width="100%" height="100%">
+                <defs>
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#334155" stroke-width="0.5" opacity="0.4"/>
+                    </pattern>
+                </defs>
+                <rect width="340" height="340" fill="url(#grid)" />`;
+
+            if (supportType === 'beam') {
+                planSvg += `
+                    <!-- Concrete Beam Background -->
+                    <rect x="0" y="${pedY}" width="340" height="${pedH_px}" fill="#334155" stroke="#94a3b8" stroke-width="3"/>
+                    <line x1="0" y1="${pedY - 2}" x2="340" y2="${pedY - 2}" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                    <line x1="0" y1="${pedY + pedH_px + 2}" x2="340" y2="${pedY + pedH_px + 2}" stroke="#64748b" stroke-width="1" stroke-dasharray="3 3"/>
+                    <text x="15" y="${pedY + 15}" fill="#94a3b8" font-size="7" font-weight="bold">RC BEAM</text>
+                `;
+            } else {
+                planSvg += `
+                    <!-- Concrete Outline / Pedestal Base (เสาตอม่อคอนกรีต) -->
+                    <rect x="${pedX}" y="${pedY}" width="${pedW_px}" height="${pedH_px}" fill="#334155" stroke="#94a3b8" stroke-width="3" rx="3"/>
+                    <rect x="${pedX - 2}" y="${pedY - 2}" width="${pedW_px + 4}" height="${pedH_px + 4}" fill="none" stroke="#64748b" stroke-width="1" stroke-dasharray="2 2" rx="4"/>
+                `;
+            }
+                
+            planSvg += `
+                <!-- Base plate steel -->
+                <rect x="${plateX}" y="${plateY}" width="${plateW_px}" height="${plateH_px}" fill="#1e293b" stroke="#cbd5e1" stroke-width="2" rx="1"/>`;
+
+            // --- SMART COLUMN SHAPE PATH GENERATION (หน้าตัดเหล็กตามพิกัดและขนาดสเกลจริง) ---
+            let columnPath = "";
+            const builtupMode = document.getElementById('builtup_style').value;
+            const builtupAngleMode = document.getElementById('builtup_style_angle').value;
+
+            switch (shapeType) {
+                case "SHS":
+                case "RHS":
+                    // Hollow Box Shape
+                    columnPath = `
+                        <rect x="${colX}" y="${colY}" width="${colW_x_px}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        <rect x="${colX + colT_px}" y="${colY + colT_px}" width="${colW_x_px - 2*colT_px}" height="${colH_y_px - 2*colT_px}" fill="#1e293b" stroke="#6366f1" stroke-width="0.8"/>
+                    `;
+                    break;
+                case "H_BEAM":
+                    // H-Beam Shape
+                    columnPath = `
+                        <rect x="${colX}" y="${colY}" width="${colW_x_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        <rect x="${colX}" y="${colY + colH_y_px - colT_px}" width="${colW_x_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        <rect x="${cx - colT_px/2}" y="${colY + colT_px}" width="${colT_px}" height="${colH_y_px - 2*colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                    `;
+                    break;
+                case "Channel":
+                    // C-Channel Shape
+                    columnPath = `
+                        <rect x="${colX}" y="${colY}" width="${colT_px}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        <rect x="${colX + colT_px}" y="${colY}" width="${colW_x_px - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        <rect x="${colX + colT_px}" y="${colY + colH_y_px - colT_px * 1.5}" width="${colW_x_px - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                    `;
+                    break;
+                case "Channel_Double":
+                    // Double C-Channel (Box or I configuration)
+                    if (builtupMode === 'ksc') { // Face-to-Face (Box)
+                        columnPath = `
+                            <!-- Left Channel -->
+                            <rect x="${colX}" y="${colY}" width="${colT_px}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <rect x="${colX + colT_px}" y="${colY}" width="${colW_x_px/2 - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <rect x="${colX + colT_px}" y="${colY + colH_y_px - colT_px * 1.5}" width="${colW_x_px/2 - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <!-- Right Channel (Mirror) -->
+                            <rect x="${colX + colW_x_px - colT_px}" y="${colY}" width="${colT_px}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <rect x="${colX + colW_x_px/2}" y="${colY}" width="${colW_x_px/2 - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <rect x="${colX + colW_x_px/2}" y="${colY + colH_y_px - colT_px * 1.5}" width="${colW_x_px/2 - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        `;
+                    } else { // Back-to-Back
+                        columnPath = `
+                            <!-- Back to Back Channels -->
+                            <rect x="${cx - colT_px}" y="${colY}" width="${colT_px*2}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <!-- Left Flanges -->
+                            <rect x="${colX}" y="${colY}" width="${colW_x_px/2 - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <rect x="${colX}" y="${colY + colH_y_px - colT_px * 1.5}" width="${colW_x_px/2 - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <!-- Right Flanges -->
+                            <rect x="${cx + colT_px}" y="${colY}" width="${colW_x_px/2 - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <rect x="${cx + colT_px}" y="${colY + colH_y_px - colT_px * 1.5}" width="${colW_x_px/2 - colT_px}" height="${colT_px * 1.5}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        `;
+                    }
+                    break;
+                case "Lightlip":
+                    // Light Lip Channel Shape
+                    columnPath = `
+                        <rect x="${colX}" y="${colY}" width="${colT_px}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                        <rect x="${colX + colT_px}" y="${colY}" width="${colW_x_px - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                        <rect x="${colX + colT_px}" y="${colY + colH_y_px - colT_px}" width="${colW_x_px - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                        <rect x="${colX + colW_x_px - colT_px}" y="${colY + colT_px}" width="${colT_px}" height="${colH_y_px * 0.15}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                        <rect x="${colX + colW_x_px - colT_px}" y="${colY + colH_y_px - colT_px - colH_y_px * 0.15}" width="${colT_px}" height="${colH_y_px * 0.15}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                    `;
+                    break;
+                case "Lightlip_Double":
+                    // Double Lip Channel
+                    if (builtupMode === 'ksc') { // Box Configuration
+                        columnPath = `
+                            <!-- Left Lip Channel -->
+                            <rect x="${colX}" y="${colY}" width="${colT_px}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <rect x="${colX + colT_px}" y="${colY}" width="${colW_x_px/2 - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <rect x="${colX + colT_px}" y="${colY + colH_y_px - colT_px}" width="${colW_x_px/2 - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <!-- Right Lip Channel (Mirror) -->
+                            <rect x="${colX + colW_x_px - colT_px}" y="${colY}" width="${colT_px}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <rect x="${colX + colW_x_px/2}" y="${colY}" width="${colW_x_px/2 - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <rect x="${colX + colW_x_px/2}" y="${colY + colH_y_px - colT_px}" width="${colW_x_px/2 - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                        `;
+                    } else { // Back-to-Back Lip Channels
+                        columnPath = `
+                            <rect x="${cx - colT_px}" y="${colY}" width="${colT_px*2}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <!-- Left Lips -->
+                            <rect x="${colX}" y="${colY}" width="${colW_x_px/2 - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <rect x="${colX}" y="${colY + colH_y_px - colT_px}" width="${colW_x_px/2 - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <!-- Right Lips -->
+                            <rect x="${cx + colT_px}" y="${colY}" width="${colW_x_px/2 - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                            <rect x="${cx + colT_px}" y="${colY + colH_y_px - colT_px}" width="${colW_x_px/2 - colT_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.2"/>
+                        `;
+                    }
+                    break;
+                case "Pipe":
+                    // Round Pipe Shape
+                    columnPath = `
+                        <circle cx="${cx}" cy="${cy}" r="${colW_x_px / 2}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        <circle cx="${cx}" cy="${cy}" r="${(colW_x_px / 2) - colT_px}" fill="#1e293b" stroke="#6366f1" stroke-width="0.8"/>
+                    `;
+                    break;
+                case "Angle":
+                    // L-Angle Shape
+                    columnPath = `
+                        <rect x="${colX}" y="${colY + colH_y_px - colT_px}" width="${colW_x_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        <rect x="${colX}" y="${colY}" width="${colT_px}" height="${colH_y_px - colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                    `;
+                    break;
+                case "Angle_Double":
+                    if (builtupAngleMode === 'B2B') { // T-Shape Back-to-Back
+                        columnPath = `
+                            <!-- Horizontal flange (top) -->
+                            <rect x="${colX}" y="${colY}" width="${colW_x_px}" height="${colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <!-- Vertical webs side-by-side -->
+                            <rect x="${cx - colT_px}" y="${colY + colT_px}" width="${colT_px*2}" height="${colH_y_px/2 - colT_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        `;
+                    } else { // Star shape (ประกบสี่แฉกเป็นรูปดวงดาว)
+                        columnPath = `
+                            <!-- Center star configuration -->
+                            <rect x="${cx - colT_px}" y="${colY}" width="${colT_px*2}" height="${colH_y_px}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                            <rect x="${colX}" y="${cy - colT_px}" width="${colW_x_px}" height="${colT_px*2}" fill="#475569" stroke="#6366f1" stroke-width="1.5"/>
+                        `;
+                    }
+                    break;
+            }
+
+            planSvg += columnPath;
+
+            // Draw reinforcement steel (Rebars) based on support type
+            if (supportType === 'beam') {
+                const rSpacingY = (pedH_px - 28) / (rebarNy - 1);
+                for (let j = 0; j < rebarNy; j++) {
+                    const rY = pedY + 14 + j * rSpacingY;
+                    planSvg += `
+                        <!-- Longitudinal Beam Rebars -->
+                        <line x1="0" y1="${rY}" x2="340" y2="${rY}" stroke="#ef4444" stroke-width="2.5" opacity="0.85"/>
+                    `;
+                }
+                for (let i = 0; i < 7; i++) {
+                    const stirrupX = 20 + i * 50;
+                    planSvg += `
+                        <!-- Shear Stirrup link lines -->
+                        <line x1="${stirrupX}" y1="${pedY + 10}" x2="${stirrupX}" y2="${pedY + pedH_px - 10}" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="2 2" opacity="0.8"/>
+                    `;
+                }
+            } else {
+                const rStepX = (pedW_px - 32) / (rebarNx - 1);
+                const rStepY = (pedH_px - 32) / (rebarNy - 1);
+                
+                planSvg += `<!-- Stirrup boundary -->
+                <rect x="${pedX + 12}" y="${pedY + 12}" width="${pedW_px - 24}" height="${pedH_px - 24}" fill="none" stroke="#22c55e" stroke-width="1.2" stroke-dasharray="3 3"/>`;
+
+                for (let i = 0; i < rebarNx; i++) {
+                    planSvg += `<circle cx="${pedX + 16 + i * rStepX}" cy="${pedY + 16}" r="3.5" fill="#ef4444" />`;
+                    planSvg += `<circle cx="${pedX + 16 + i * rStepX}" cy="${pedY + pedH_px - 16}" r="3.5" fill="#ef4444" />`;
+                }
+                for (let j = 1; j < rebarNy - 1; j++) {
+                    planSvg += `<circle cx="${pedX + 16}" cy="${pedY + 16 + j * rStepY}" r="3.5" fill="#ef4444" />`;
+                    planSvg += `<circle cx="${pedX + pedW_px - 16}" cy="${pedY + 16 + j * rStepY}" r="3.5" fill="#ef4444" />`;
+                }
+            }
+
+            // Draw Bolts dynamically - **SCALED PROPORTIONALLY IN MILLIMETERS** (Fidelity Scale Solution)
+            const baseBoltRad_px = Math.max(2.5, (boltSize.d / 2) * scale);
+            const washerRad_px = baseBoltRad_px * 2.2; 
+
+            activeBolts.forEach(bolt => {
+                const bx = cx + (bolt.x * 10 * scale);
+                const by = cy - (bolt.y * 10 * scale);
+
+                // Stress/Tension gradient visualization (No physical size blowing up, perfectly scaled!)
+                const tensionFactor = Tmax > 0 ? (bolt.tension / Tmax) : 0;
+                // Red/Amber/Green color representation
+                const colorHex = tensionFactor > 0.8 ? "#ef4444" : (tensionFactor > 0.4 ? "#f59e0b" : "#10b981");
+
+                planSvg += `
+                    <g>
+                        <!-- Steel Washer Plate (Scaled) -->
+                        <circle cx="${bx}" cy="${by}" r="${washerRad_px}" fill="#64748b" fill-opacity="0.6" stroke="${colorHex}" stroke-width="1.5"/>
+                        <!-- Bolt Thread/Nut (Scaled) -->
+                        <circle cx="${bx}" cy="${by}" r="${baseBoltRad_px}" fill="#f59e0b" stroke="#ffffff" stroke-width="1"/>
+                        <circle cx="${bx}" cy="${by}" r="${baseBoltRad_px * 0.4}" fill="#0f172a" />
+                        
+                        <!-- Stress Rings representing tension intensity without modifying bolt physical scale -->
+                        <circle cx="${bx}" cy="${by}" r="${washerRad_px + 4}" fill="none" stroke="${colorHex}" stroke-width="1" stroke-dasharray="2 1" opacity="${0.2 + tensionFactor*0.8}"/>
+
+                        <!-- Bolt Label & Tension Text -->
+                        <text x="${bx}" y="${by - washerRad_px - 5}" fill="#fcd34d" font-size="8.5" font-family="sans-serif" font-weight="bold" text-anchor="middle" stroke="#000000" stroke-width="2" paint-order="stroke">${bolt.id}</text>
+                        <text x="${bx}" y="${by + washerRad_px + 10}" fill="#a7f3d0" font-size="7.5" font-family="monospace" font-weight="bold" text-anchor="middle" stroke="#000000" stroke-width="2" paint-order="stroke">${formatVal(bolt.tension)}</text>
+                    </g>
+                `;
+            });
+
+            // Dimensions
+            const sx_px = sx * scale;
+            const sy_px = sy * scale;
+
+            planSvg += drawHVal(cx - sx_px/2, cx + sx_px/2, cy + plateH_px/2 + 8, `s_x = ${sx.toFixed(0)}mm`);
+            planSvg += drawVVal(cx + plateW_px/2 + 8, cy - sy_px/2, cy + sy_px/2, `s_y = ${sy.toFixed(0)}mm`);
+
+            const c_bolt_px = c_bolt * scale;
+            planSvg += `
+                <g stroke="#22d3ee" stroke-width="1.2">
+                    <line x1="${cx + (sx_px/2)}" y1="${cy}" x2="${cx + (sx_px/2) + c_bolt_px}" y2="${cy}" stroke-dasharray="2 1"/>
+                    <path d="M ${cx + (sx_px/2)} ${cy} L ${cx + (sx_px/2) + 4} ${cy-3} L ${cx + (sx_px/2) + 4} ${cy+3} Z" fill="#22d3ee"/>
+                    <path d="M ${cx + (sx_px/2) + c_bolt_px} ${cy} L ${cx + (sx_px/2) + c_bolt_px - 4} ${cy-3} L ${cx + (sx_px/2) + c_bolt_px - 4} ${cy+3} Z" fill="#22d3ee"/>
+                    <text x="${cx + (sx_px/2) + c_bolt_px/2}" y="${cy - 5}" fill="#22d3ee" font-size="7.5" font-family="sans-serif" font-weight="bold" text-anchor="middle" stroke="#000000" stroke-width="1.5" paint-order="stroke">c_bolt=${c_bolt}mm</text>
+                </g>
+            `;
+
+            planSvg += drawHVal(plateX, plateX + plateW_px, cy + plateH_px/2 + 22, `Bp = ${plateB}mm`);
+            planSvg += drawVVal(cx + plateW_px/2 + 22, plateY, plateY + plateH_px, `Dp = ${plateD}mm`);
+            
+            if (supportType === 'beam') {
+                planSvg += drawVVal(pedX - 12, pedY, pedY + pedH_px, `Bb = ${pedD}mm`);
+            } else {
+                planSvg += drawHVal(pedX, pedX + pedW_px, pedY - 12, `Bc = ${pedB}mm`);
+                planSvg += drawVVal(pedX - 12, pedY, pedY + pedH_px, `Dc = ${pedD}mm`);
+            }
+
+            planSvg += drawHVal(colX, colX + colW_x_px, colY - 5, `Bx = ${colWidthX}mm`);
+            planSvg += drawVVal(colX - 5, colY, colY + colH_y_px, `Dy = ${colWidthY}mm`);
+
+            planSvg += `</svg>`;
+            
+            const svgPlanContainer = document.getElementById('svg_plan_container');
+            if (svgPlanContainer) {
+                svgPlanContainer.innerHTML = planSvg;
+            }
+
+            // --- SECTION VIEW ---
+            const sec_scale = 240 / pedB;
+            const col_left_x = cx - (colWidthX * sec_scale / 2);
+            const col_right_x = cx + (colWidthX * sec_scale / 2);
+
+            let sectionSvg = `<svg viewBox="0 0 340 340" width="100%" height="100%">
+                <rect width="340" height="340" fill="url(#grid)" />
+                
+                <!-- Concrete Block -->
+                <rect x="50" y="100" width="240" height="210" fill="#475569" stroke="#94a3b8" stroke-width="2" rx="3"/>
+                
+                <!-- Grout -->
+                <rect x="65" y="85" width="210" height="15" fill="#cbd5e1" stroke="#94a3b8" stroke-width="1"/>
+                
+                <!-- Plate -->
+                <rect x="65" y="73" width="210" height="12" fill="#1e293b" stroke="#cbd5e1" stroke-width="1.5"/>
+                
+                <!-- Column Profile Section (สเกลตามหน้าตัดที่เลือกจริง) -->
+                <line x1="${col_left_x}" y1="10" x2="${col_left_x}" y2="73" stroke="#6366f1" stroke-width="3"/>
+                <line x1="${col_right_x}" y1="10" x2="${col_right_x}" y2="73" stroke="#6366f1" stroke-width="3"/>
+                <line x1="${col_left_x}" y1="25" x2="${col_right_x}" y2="25" stroke="#6366f1" stroke-width="0.8"/>
+
+                <!-- Pedestal reinforcement -->
+                <line x1="75" y1="100" x2="75" y2="300" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="2 2"/>
+                <line x1="265" y1="100" x2="265" y2="300" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="2 2"/>
+                <line x1="95" y1="100" x2="95" y2="300" stroke="#ef4444" stroke-width="1.5"/>
+                <line x1="245" y1="100" x2="245" y2="300" stroke="#ef4444" stroke-width="1.5"/>`;
+
+            const sSpacing = 190 / stirrupLayers;
+            for (let s = 0; s < stirrupLayers; s++) {
+                const sY = 115 + s * sSpacing;
+                sectionSvg += `<line x1="70" y1="${sY}" x2="270" y2="${sY}" stroke="#22c55e" stroke-width="1.5"/>`;
+            }
+
+            // Left and Right outermost anchor bolts (Scaled dynamically in mm)
+            const min_x_cm = Math.min(...activeBolts.map(b => b.x));
+            const max_x_cm = Math.max(...activeBolts.map(b => b.x));
+            const boltLeft_px = cx + (min_x_cm * 10 * sec_scale);
+            const boltRight_px = cx + (max_x_cm * 10 * sec_scale);
+            
+            const bEmbed_px = hef * sec_scale;
+            const boltY_start = 73;
+            const boltY_end = boltY_start + bEmbed_px;
+
+            const bThickness = Math.max(1.8, boltSize.d * sec_scale);
+            const hookLen = Math.max(8, boltSize.d * 1.2 * sec_scale);
+
+            sectionSvg += `
+                <!-- Left bolt with L-hook -->
+                <line x1="${boltLeft_px}" y1="${boltY_start - 12}" x2="${boltLeft_px}" y2="${boltY_end}" stroke="#f59e0b" stroke-width="${bThickness}"/>
+                <line x1="${boltLeft_px}" y1="${boltY_end}" x2="${boltLeft_px + hookLen}" y2="${boltY_end}" stroke="#f59e0b" stroke-width="${bThickness}"/>
+                <circle cx="${boltLeft_px}" cy="${boltY_start - 12}" r="${Math.max(2, bThickness * 0.8)}" fill="#ffffff"/>
+                
+                <!-- Right bolt with L-hook -->
+                <line x1="${boltRight_px}" y1="${boltY_start - 12}" x2="${boltRight_px}" y2="${boltY_end}" stroke="#f59e0b" stroke-width="${bThickness}"/>
+                <line x1="${boltRight_px}" y1="${boltY_end}" x2="${boltRight_px + hookLen}" y2="${boltY_end}" stroke="#f59e0b" stroke-width="${bThickness}"/>
+                <circle cx="${boltRight_px}" cy="${boltY_start - 12}" r="${Math.max(2, bThickness * 0.8)}" fill="#ffffff"/>
+            `;
+
+            // Dimensions on section
+            sectionSvg += drawVVal(295, boltY_start, boltY_end, `hef = ${hef}mm`);
+            sectionSvg += drawVVal(20, 85, 100, `Grout`);
+            sectionSvg += drawVVal(20, 73, 85, `Plate`);
+            
+            if (supportType === 'beam') {
+                sectionSvg += drawHVal(50, 290, 315, `Bb = ${pedB}mm`);
+            } else {
+                sectionSvg += drawHVal(50, 290, 315, `Bc = ${pedB}mm`);
+            }
+
+            sectionSvg += `</svg>`;
+            
+            const svgSectionContainer = document.getElementById('svg_section_container');
+            if (svgSectionContainer) {
+                svgSectionContainer.innerHTML = sectionSvg;
+            }
+        }
+
+        window.onload = function() {
+            updateSteelSectionDropdown();
+        };
+    </script>
+</body>
+</html>
